@@ -3,7 +3,6 @@ TIMESTAMP := $(shell date +%Y-%m-%d_%H-%M-%S)
 MYSQL_CREDS := $(if $(MYSQL_ALLOW_EMPTY_PASSWORD),-uroot,-uroot -p)
 MYSQL_DATABASE ?= sdc
 COVERAGE_THRESHOLD ?= 90
-COVERAGE_TOTAL ?= `jq '.totals.percent_covered?' coverage.json`
 UNAME := $(shell uname -m)
 
 build:
