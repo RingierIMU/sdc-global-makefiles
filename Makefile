@@ -46,4 +46,4 @@ test-dependant:
 	make test;
 
 init:
-	ln -s make/MakeFile ../Makefile
+	ln -s make/Makefile ../Makefile
