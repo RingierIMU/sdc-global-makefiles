@@ -5,6 +5,7 @@ MYSQL_DATABASE ?= sdc
 COVERAGE_THRESHOLD ?= 90
 REPO_NAME ?= ''
 UNAME := $(shell uname -m)
+CURRENT_DIR= $(shell pwd)
 
 build:
 	make install-requirements;
@@ -45,4 +46,4 @@ test-dependant:
 	make test;
 
 init:
-	ln -s MakeFile ../Makefile
+	ln -s make/MakeFile ../Makefile
