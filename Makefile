@@ -3,6 +3,7 @@ TIMESTAMP := $(shell date +%Y-%m-%d_%H-%M-%S)
 MYSQL_CREDS := $(if $(MYSQL_ALLOW_EMPTY_PASSWORD),-uroot,-uroot -p)
 MYSQL_DATABASE ?= sdc
 COVERAGE_THRESHOLD ?= 90
+REPO_NAME ?= ''
 UNAME := $(shell uname -m)
 
 build:
@@ -37,8 +38,8 @@ redis-flush:
 	sudo apt-get install redis-tools;
 	redis-cli FLUSHALL;
 
-checkout-dependant:
-	git clone https://lucidlogic:${GIT_ACCESS_TOKEN}@github.com/RingierIMU/${REPO_NAME}.git
-	cd ${REPO_NAME}
-	VERSION=$(grep ${PACKAGE_NAME}== requirements.txt | grep -Eo '[0-9]+([.][0-9]+)?');
-	sed -i 's#${PACKAGE_NAME}==$VERSION#git+ssh://git@github.com/${{ github.repository }}/@${{ github.head_ref }}#g' requirements.txt
+test-dependant:
+	sed -i 's#${PACKAGE_NAME}==${VERSION}#git+https://lucidlogic:${ACCESS_TOKEN}@github.com/${REPO_NAME}/@${BRANCH_NAME}#g' requirements.txt
+	make install-requirements;
+	make hard-refresh;
+	make test;
