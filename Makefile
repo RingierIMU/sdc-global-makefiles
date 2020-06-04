@@ -43,3 +43,6 @@ test-dependant:
 	make install-requirements;
 	make hard-refresh;
 	make test;
+
+init:
+	ln -s MakeFile ../Makefile
