@@ -45,5 +45,10 @@ test-dependant:
 	make hard-refresh;
 	make test;
 
+test-dependant-no-db:
+	sed -i 's#${PACKAGE_NAME}==${VERSION}#git+https://lucidlogic:${ACCESS_TOKEN}@github.com/${REPO_NAME}/@${BRANCH_NAME}#g' requirements.txt
+	make install-requirements;
+	make test;
+
 init:
 	ln -s make/Makefile ../Makefile
