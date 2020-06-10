@@ -50,5 +50,20 @@ test-dependant-no-db:
 	make install-requirements;
 	make test;
 
+update-submodule:
+	git submodule update --remote --merge
+
+get-notify-merge-json:
+	@echo '{
+            \"channel\":\"G010246RK26\",
+            \"attachments\":[
+              {
+                \"text\":\"${USER} triggered a deploy of `master` for commit `"${MESSAGE}"` (`${SHA}`) to *Lambda Production*. :excited:" \",
+                \"color\":\"#4d91f7\",
+                \"title\":\"${REPO}\"
+              }
+            ]
+          }'
+
 init:
 	ln -s make/Makefile ../Makefile
