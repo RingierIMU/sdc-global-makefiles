@@ -26,6 +26,10 @@ test:
 
 install-requirements:
 	python -m pip install --upgrade pip;
+	pip install -r requirements.txt -t;
+
+install-local-requirements:
+	python -m pip install --upgrade pip;
 	pip install -r requirements.txt -t ./;
 
 db-refresh:
