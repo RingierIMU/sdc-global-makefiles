@@ -26,7 +26,7 @@ test:
 
 install-requirements:
 	python -m pip install --upgrade pip;
-	pip install -r requirements.txt -t;
+	pip install -r requirements.txt;
 
 install-local-requirements:
 	python -m pip install --upgrade pip;
