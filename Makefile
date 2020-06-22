@@ -83,10 +83,8 @@ publish-lambda:
 	aws lambda update-alias --function-name  ${FUNCTION_NAME} --name master --function-version ${VERSION}
 
 update-version:
-	$(eval VERSION := $(shell grep version= setup.py | grep -Eo '[0-9]+([.][0-9]+)([.][0-9]+)?'));
-	$(eval REMOVE="refs/tags/v");
-	$(eval NEW_VERSION=${REF//$(REMOVE)/})
-	sed -i "s#${VERSION}#${NEW_VERSION}#g" setup.py
+	$(eval VERSION := $(shell grep version= setup.py | grep -Eo '[0-9]+([.][0-9]+)([.][0-9]+)?'))
+	sed -i '' 's#${VERSION}#$(REF:refs/tags/v%=%)#g' setup.py
 
 init:
 	ln -s make/Makefile ../Makefile
