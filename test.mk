@@ -20,14 +20,6 @@ test:
 	coverage run -m pytest;
 	coverage report --fail-under=${COVERAGE_THRESHOLD}
 
-install-requirements:
-	python -m pip install --upgrade pip;
-	pip install -r requirements.txt;
-
-install-local-requirements:
-	python -m pip install --upgrade pip;
-	pip install -r requirements.txt -t ./;
-
 db-refresh:
 	mysql -h127.0.0.1 ${MYSQL_CREDS} -e "DROP DATABASE IF EXISTS "${MYSQL_DATABASE}";";
 	mysql -h127.0.0.1 ${MYSQL_CREDS} -e "CREATE DATABASE "${MYSQL_DATABASE}";";

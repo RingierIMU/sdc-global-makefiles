@@ -2,9 +2,6 @@ SHELL := /bin/bash
 AWS_CLI_URL="https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
 MESSAGE ?= 'none'
 
-update-submodule:
-	git submodule update --remote --merge
-
 install-aws-cli:
 	curl $(AWS_CLI_URL) -o "awscliv2.zip"
 	unzip awscliv2.zip
