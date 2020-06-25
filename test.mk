@@ -3,7 +3,6 @@ TIMESTAMP := $(shell date +%Y-%m-%d_%H-%M-%S)
 MYSQL_CREDS := $(if $(MYSQL_ALLOW_EMPTY_PASSWORD),-uroot,-uroot -p)
 MYSQL_DATABASE ?= sdc
 COVERAGE_THRESHOLD ?= 90
-REPO_NAME ?= ''
 
 build:
 	make install-requirements;
@@ -35,13 +34,13 @@ redis-flush:
 
 test-dependant:
 	$(eval VERSION := $(shell grep ${PACKAGE_NAME}== requirements.txt | grep -Eo '[0-9]+([.][0-9]+)([.][0-9]+)?'))
-	sed -i 's#${PACKAGE_NAME}==${VERSION}#git+https://lucidlogic:${ACCESS_TOKEN}@github.com/${REPO_NAME}/@${BRANCH_NAME}#g' requirements.txt
+	sed -i 's#${PACKAGE_NAME}==${VERSION}#git+https://lucidlogic:${GIT_ACCESS_TOKEN}@github.com/${REPO_NAME}/@${BRANCH_NAME}#g' requirements.txt
 	make install-requirements;
 	make hard-refresh;
 	make test;
 
 test-dependant-no-db:
 	$(eval VERSION := $(shell grep ${PACKAGE_NAME}== requirements.txt | grep -Eo '[0-9]+([.][0-9]+)([.][0-9]+)?'))
-	sed -i 's#${PACKAGE_NAME}==${VERSION}#git+https://lucidlogic:${ACCESS_TOKEN}@github.com/${REPO_NAME}/@${BRANCH_NAME}#g' requirements.txt
+	sed -i 's#${PACKAGE_NAME}==${VERSION}#git+https://lucidlogic:${GIT_ACCESS_TOKEN}@github.com/${REPO_NAME}/@${BRANCH_NAME}#g' requirements.txt
 	make install-requirements;
 	make test;
