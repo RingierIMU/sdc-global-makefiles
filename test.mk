@@ -34,6 +34,7 @@ redis-flush:
 	redis-cli FLUSHALL;
 
 test-dependant:
+	$(eval VERSION := $(shell grep ${PACKAGE_NAME}== requirements.txt | grep -Eo '0-9]+([.][0-9]+)([.][0-9]+)?'))
 	sed -i 's#${PACKAGE_NAME}==${VERSION}#git+https://lucidlogic:${ACCESS_TOKEN}@github.com/${REPO_NAME}/@${BRANCH_NAME}#g' requirements.txt
 	make install-requirements;
 	make hard-refresh;
