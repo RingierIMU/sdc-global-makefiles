@@ -1,5 +1,8 @@
 SHELL := /bin/bash
 
+# update the version in the setup.py for publishing
 update-version:
 	$(eval VERSION := $(shell grep version= setup.py | grep -Eo '[0-9]+([.][0-9]+)([.][0-9]+)?'))
-	sed -i 's#${VERSION}#$(REF:refs/tags/v%=%)#g' setup.py
+	$(eval NEW_VERSION := $(REF:refs/tags/v%=%))
+	sed -i "s#version='${VERSION}'#version='$(NEW_VERSION)'#g" setup.py
+	sed -i "s#${VERSION}.zip#$(NEW_VERSION).zip#g" setup.py
