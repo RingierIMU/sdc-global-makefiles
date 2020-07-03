@@ -22,5 +22,5 @@ check-response:
 	fi
 
 publish-lambda:
-	$(eval VERSION := $(shell aws lambda publish-version --function-name  ${FUNCTION_NAME} --description "$(shell echo ${MESSAGE} | cut -c1-250)" --query 'Version' --output text))
+	$(eval VERSION := $(shell aws lambda publish-version --function-name  ${FUNCTION_NAME} --description "$(shell echo '${MESSAGE}' | cut -c1-250)" --query 'Version' --output text))
 	aws lambda update-alias --function-name  ${FUNCTION_NAME} --name master --function-version ${VERSION}
