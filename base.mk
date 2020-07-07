@@ -7,7 +7,7 @@ install-requirements:
 install-local-requirements:
 	python -m pip install --upgrade pip;
 	pip install -r requirements.txt -t ./;
-	test -f uninstall.txt && pip uninstall -r uninstall.txt -y;
+	test -f deploy_cleanup.sh && ./deploy_cleanup.sh;
 
 update-submodule:
 	git submodule update --remote --merge
