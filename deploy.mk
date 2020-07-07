@@ -17,7 +17,7 @@ invoke:
 check-response:
 	$(eval ERROR := $(shell jq 'select(.errorMessage != null) | .errorMessage' ./response.json))
 
-	if [ ${ERROR} ]; then\
+	@if [ ${ERROR} ]; then\
 		echo ${ERROR};exit 1; \
 	fi
 
