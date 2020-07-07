@@ -7,6 +7,9 @@ install-requirements:
 install-local-requirements:
 	python -m pip install --upgrade pip;
 	pip install -r requirements.txt -t ./;
+	if [ -f "uninstall.txt" ]; then
+	  pip uninstall -r uninstall.txt -y;
+	fi
 
 update-submodule:
 	git submodule update --remote --merge
