@@ -24,3 +24,7 @@ check-response:
 publish-lambda:
 	$(eval VERSION := $(shell aws lambda publish-version --function-name  ${FUNCTION_NAME} --description "$(shell echo '${MESSAGE}' | cut -c1-250)" --query 'Version' --output text))
 	aws lambda update-alias --function-name  ${FUNCTION_NAME} --name master --function-version ${VERSION}
+
+update-glue:
+	aws s3 cp ./scripts/${SCRIPT} s3://prod-recommendation/horizon/alice/scripts/${SCRIPT}
+	aws glue update-job --job-name ${JOB_NAME} --job-update Role=AWSGlueServiceRole,Command="{Name=glueetl,ScriptLocation=s3://prod-recommendation/horizon/alice/scripts/${SCRIPT}}"
