@@ -27,4 +27,4 @@ publish-lambda:
 
 update-glue:
 	aws s3 cp ./scripts/${SCRIPT} s3://prod-recommendation/horizon/alice/scripts/${SCRIPT}
-	aws glue update-job --job-name ${JOB_NAME} --job-update Role=AWSGlueServiceRole,Command="{Name=glueetl,ScriptLocation=s3://prod-recommendation/horizon/alice/scripts/${SCRIPT}}"
+	aws glue update-job --job-name ${JOB_NAME} --job-update Role=AWSGlueServiceRole,Command="{Name=glueetl,ScriptLocation=s3://prod-recommendation/horizon/alice/scripts/${SCRIPT},PythonVersion=3}"
