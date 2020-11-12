@@ -26,7 +26,7 @@ db-refresh:
 
 lint:
 	pip install pylint;
-	find . -type f -name "*.py" | xargs pylint;
+	find . -type f -name "*.py" | xargs pylint --ignored-modules=pyspark,awsglue --extension-pkg-whitelist=pyspark,awsglue;
 
 redis-flush:
 	sudo apt-get install redis-tools;
