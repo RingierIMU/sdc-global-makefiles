@@ -19,6 +19,10 @@ test:
 	coverage run -m pytest;
 	coverage report --fail-under=${COVERAGE_THRESHOLD}
 
+test-no-cover:
+	pip install pytest mock pytest-mock pytest-console-scripts;
+	pytest;
+
 db-refresh:
 	mysql -h127.0.0.1 ${MYSQL_CREDS} -e "DROP DATABASE IF EXISTS "${MYSQL_DATABASE}";";
 	mysql -h127.0.0.1 ${MYSQL_CREDS} -e "CREATE DATABASE "${MYSQL_DATABASE}";";
